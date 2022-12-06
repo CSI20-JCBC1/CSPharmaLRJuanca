@@ -53,7 +53,7 @@ namespace CSPharmaLRJuanca.Pages.Register
                     {
                         //La consulta obtienne resultado
                         Console.WriteLine("El usuario ya existe");
-                        this.Cadena = string.Format("El usuario ya está registrado.");
+                        this.Cadena = string.Format("El usuario ya está registrado.  {0}", registros);
 
                     }
                     else
@@ -62,9 +62,13 @@ namespace CSPharmaLRJuanca.Pages.Register
                         //Insertamos los valores para el registro
                         connection.Close();
 
+                        registros += 2;
+                        //FieldCount empieza desde 0 entonces sumamos dos, uno para igualarlo al numero de registros y otro para
+                        //superarlo en uno
+
                         connection.Open();
                         Console.WriteLine("Insertando usuario en la base de datos");
-                        consulta = new NpgsqlCommand($"INSERT INTO \"dlk_informacional\".\"dlk_cat_acc_empleados\" VALUES ('{registros + 1}', '{fecha}', '{empleado.CodEmpleado}', '{empleado.ClaveEmpleado}', 0);", connection);
+                        consulta = new NpgsqlCommand($"INSERT INTO \"dlk_informacional\".\"dlk_cat_acc_empleados\" VALUES ('{registros}', '{fecha}', '{empleado.CodEmpleado}', '{empleado.ClaveEmpleado}', 0);", connection);
                         //Pondremos por defecto nivel de acceso 0 y se lo cambiaremos en la base de datos
                         consulta.ExecuteNonQuery();
                         Console.WriteLine("Insert realizado con éxito");
