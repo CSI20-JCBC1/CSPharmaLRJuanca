@@ -1,0 +1,27 @@
+﻿@page
+@model CSPharmaLRJuanca.Pages.Shared.Login.Login
+@{
+    ViewData["Title"] = "Login";
+}
+
+<form method="post" class="d-flex justify-content-center " style="text-align: center">
+    <fieldset>
+        <legend>Login</legend>
+        <div>
+            <label for="CodEmpleado">Cod. Empleado:</label>
+            <input type="text" name="CodEmpleado" value="" />
+        </div>
+        <div>
+            <label for="ClaveEmpleado">Clave Empleado:</label>
+            <input type="password" name="ClaveEmpleado" value="" />
+        </div>
+
+        <div>
+            <label>&nbsp;</label>
+            <input type="submit" asp-page-handler="Submit" value="submit" class="submit"/>
+        </div>
+        <hr/>
+        @Model.Cadena
+    </fieldset>
+
+</form>
