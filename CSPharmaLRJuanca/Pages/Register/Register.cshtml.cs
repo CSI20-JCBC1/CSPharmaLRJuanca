@@ -38,7 +38,7 @@ namespace CSPharmaLRJuanca.Pages.Register
             if (ValContrasenia == empleado.ClaveEmpleado)
             {
               
-                if (empleado.CodEmpleado==null||contrasenia == null||empleado.ClaveEmpleado==null)
+                if (empleado.CodEmpleado==null||contrasenia == null||ValContrasenia==null)
                 {
                     Console.WriteLine(" Ninguno de los campos a introducir puede ser null");
                     this.Cadena = string.Format("Ninguno de los datos a introducir puede ser null.");
@@ -59,7 +59,7 @@ namespace CSPharmaLRJuanca.Pages.Register
                     {
                         //La consulta obtienne resultado
                         Console.WriteLine("El usuario ya existe");
-                        this.Cadena = string.Format("El usuario ya está registrado.  {0}", registros);
+                        this.Cadena = string.Format("El usuario ya está registrado.", registros);
 
                     }
                     else

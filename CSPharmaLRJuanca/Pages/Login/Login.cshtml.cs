@@ -35,7 +35,7 @@ namespace CSPharmaLRJuanca.Pages.Shared.Login
             {
                 Console.WriteLine("Ha iniciado sesion con exito.");
                 //La base de datos tiene el usuario y la contraseña que hemos introducido
-                this.Cadena = string.Format("Ha iniciado sesión como {0} con nivel de acceso {1}", empleado.CodEmpleado, empleado.NivelAccesoEmpleado);
+                this.Cadena = string.Format("Ha iniciado sesión como {0} con nivel de acceso {1}.", empleado.CodEmpleado, empleado.NivelAccesoEmpleado);
                 
                 
             }
@@ -43,7 +43,7 @@ namespace CSPharmaLRJuanca.Pages.Shared.Login
             {
                 Console.WriteLine("Error en el inicio de sesión.");
                 //La base de datos no tene el usuario que hemos introducido
-                this.Cadena = string.Format("No ha sido posible iniciar la sesión, intentelo de nuevo");
+                this.Cadena = string.Format("Usuario o contraseña no válidos, por favor intentelo de nuevo.");
             }
 
             Console.WriteLine("Cerrando conexion");
