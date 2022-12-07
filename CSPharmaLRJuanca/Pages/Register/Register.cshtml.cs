@@ -38,7 +38,13 @@ namespace CSPharmaLRJuanca.Pages.Register
             if (ValContrasenia == empleado.ClaveEmpleado)
             {
               
-                if ( contrasenia.Length >= 7)
+                if (empleado.CodEmpleado==null||contrasenia == null||empleado.ClaveEmpleado==null)
+                {
+                    Console.WriteLine(" Ninguno de los campos a introducir puede ser null");
+                    this.Cadena = string.Format("Ninguno de los datos a introducir puede ser null.");
+                    //Controlamos los errores al introducir valores nulos
+                }
+                else if ( contrasenia.Length >= 7)
                 {
                     //Controlado el numero de caracteres de la contraseña
 
