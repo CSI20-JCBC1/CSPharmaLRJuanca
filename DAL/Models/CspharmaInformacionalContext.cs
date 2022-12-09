@@ -40,11 +40,14 @@ public partial class CspharmaInformacionalContext : DbContext
             entity.ToTable("dlk_cat_acc_empleados", "dlk_informacional");
 
             entity.Property(e => e.CodEmpleado)
-                .HasMaxLength(7)
+                .HasColumnType("character varying")
                 .HasColumnName("cod_empleado");
             entity.Property(e => e.ClaveEmpleado)
                 .HasColumnType("character varying")
                 .HasColumnName("clave_empleado");
+            entity.Property(e => e.Id)
+                .ValueGeneratedOnAdd()
+                .HasColumnName("id");
             entity.Property(e => e.MdDate)
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("md_date");
@@ -56,92 +59,90 @@ public partial class CspharmaInformacionalContext : DbContext
 
         modelBuilder.Entity<TdcCatEstadosDevolucionPedido>(entity =>
         {
-            entity.HasKey(e => e.MdUuid);
+            entity.HasKey(e => e.CodEstadoDevolucion);
 
-            entity.ToTable("tdc_cat_estados_devolucion_pedido", "dwh_torrecontrol");
+            entity.ToTable("Tdc_cat_estados_devolucion_pedido", "dwh_torrecontrol");
 
-            entity.Property(e => e.MdUuid).HasColumnName("Md_uuid");
             entity.Property(e => e.CodEstadoDevolucion).HasColumnName("Cod_estado_devolucion");
             entity.Property(e => e.DesEstadoDevolucion).HasColumnName("Des_estado_devolucion");
-            entity.Property(e => e.Id).ValueGeneratedOnAdd();
+            entity.Property(e => e.Id).HasDefaultValueSql("nextval('dwh_torrecontrol.\"tdc_cat_estados_devolucion_pedido_Id_seq\"'::regclass)");
             entity.Property(e => e.MdDate).HasColumnName("Md_date");
+            entity.Property(e => e.MdUuid).HasColumnName("Md_uuid");
         });
 
         modelBuilder.Entity<TdcCatEstadosEnvioPedido>(entity =>
         {
-            entity.HasKey(e => e.MdUuid);
+            entity.HasKey(e => e.CodEstadoEnvio);
 
-            entity.ToTable("tdc_cat_estados_envio_pedido", "dwh_torrecontrol");
+            entity.ToTable("Tdc_cat_estados_envio_pedido", "dwh_torrecontrol");
 
-            entity.Property(e => e.MdUuid).HasColumnName("Md_uuid");
             entity.Property(e => e.CodEstadoEnvio).HasColumnName("Cod_estado_envio");
             entity.Property(e => e.DesEstadoEnvio).HasColumnName("Des_estado_envio");
-            entity.Property(e => e.Id).ValueGeneratedOnAdd();
+            entity.Property(e => e.Id).HasDefaultValueSql("nextval('dwh_torrecontrol.\"tdc_cat_estados_envio_pedido_Id_seq\"'::regclass)");
             entity.Property(e => e.MdDate).HasColumnName("Md_date");
+            entity.Property(e => e.MdUuid).HasColumnName("Md_uuid");
         });
 
         modelBuilder.Entity<TdcCatEstadosPagoPedido>(entity =>
         {
-            entity.HasKey(e => e.MdUuid);
+            entity.HasKey(e => e.CodEstadoPago);
 
-            entity.ToTable("tdc_cat_estados_pago_pedido", "dwh_torrecontrol");
+            entity.ToTable("Tdc_cat_estados_pago_pedido", "dwh_torrecontrol");
 
-            entity.Property(e => e.MdUuid).HasColumnName("Md_uuid");
             entity.Property(e => e.CodEstadoPago).HasColumnName("Cod_estado_pago");
             entity.Property(e => e.DesEstadoPago).HasColumnName("Des_estado_pago");
-            entity.Property(e => e.Id).ValueGeneratedOnAdd();
+            entity.Property(e => e.Id).HasDefaultValueSql("nextval('dwh_torrecontrol.\"tdc_cat_estados_pago_pedido_Id_seq\"'::regclass)");
             entity.Property(e => e.MdDate).HasColumnName("Md_date");
+            entity.Property(e => e.MdUuid).HasColumnName("Md_uuid");
         });
 
         modelBuilder.Entity<TdcCatLineasDistribucion>(entity =>
         {
-            entity.HasKey(e => e.MdUuid);
+            entity.HasKey(e => e.CodLinea);
 
-            entity.ToTable("tdc_cat_lineas_distribucion", "dwh_torrecontrol");
+            entity.ToTable("Tdc_cat_lineas_distribucion", "dwh_torrecontrol");
 
-            entity.Property(e => e.MdUuid).HasColumnName("Md_uuid");
-            entity.Property(e => e.CodBarrio).HasColumnName("Cod_barrio");
             entity.Property(e => e.CodLinea).HasColumnName("Cod_linea");
+            entity.Property(e => e.CodBarrio).HasColumnName("Cod_barrio");
             entity.Property(e => e.CodMunicipio).HasColumnName("Cod_municipio");
             entity.Property(e => e.CodProvincia).HasColumnName("Cod_provincia");
-            entity.Property(e => e.Id).ValueGeneratedOnAdd();
+            entity.Property(e => e.Id).HasDefaultValueSql("nextval('dwh_torrecontrol.\"tdc_cat_lineas_distribucion_Id_seq\"'::regclass)");
             entity.Property(e => e.MdDate).HasColumnName("Md_date");
+            entity.Property(e => e.MdUuid).HasColumnName("Md_uuid");
         });
 
         modelBuilder.Entity<TdcTchEstadoPedido>(entity =>
         {
-            entity.HasKey(e => e.MdUuid);
+            entity.ToTable("Tdc_tch_estado_pedidos", "dwh_torrecontrol");
 
-            entity.ToTable("tdc_tch_estado_pedidos", "dwh_torrecontrol");
+            entity.HasIndex(e => e.CodEstadoDevolucion, "IX_Tdc_tch_estado_pedidos_Cod_estado_devolucion");
 
-            entity.HasIndex(e => e.CodEstadoDevolucion, "IX_tdc_tch_estado_pedidos_Cod_estado_devolucion");
+            entity.HasIndex(e => e.CodEstadoEnvio, "IX_Tdc_tch_estado_pedidos_Cod_estado_envio");
 
-            entity.HasIndex(e => e.CodEstadoEnvio, "IX_tdc_tch_estado_pedidos_Cod_estado_envio");
+            entity.HasIndex(e => e.CodEstadoPago, "IX_Tdc_tch_estado_pedidos_Cod_estado_pago");
 
-            entity.HasIndex(e => e.CodEstadoPago, "IX_tdc_tch_estado_pedidos_Cod_estado_pago");
+            entity.HasIndex(e => e.CodLinea, "IX_Tdc_tch_estado_pedidos_Cod_linea");
 
-            entity.HasIndex(e => e.CodLinea, "IX_tdc_tch_estado_pedidos_Cod_linea");
-
-            entity.Property(e => e.MdUuid).HasColumnName("Md_uuid");
+            entity.Property(e => e.Id).HasDefaultValueSql("nextval('dwh_torrecontrol.\"tdc_tch_estado_pedidos_Id_seq\"'::regclass)");
             entity.Property(e => e.CodEstadoDevolucion).HasColumnName("Cod_estado_devolucion");
             entity.Property(e => e.CodEstadoEnvio).HasColumnName("Cod_estado_envio");
             entity.Property(e => e.CodEstadoPago).HasColumnName("Cod_estado_pago");
             entity.Property(e => e.CodLinea).HasColumnName("Cod_linea");
             entity.Property(e => e.CodPedido).HasColumnName("Cod_pedido");
-            entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.MdDate).HasColumnName("Md_date");
+            entity.Property(e => e.MdUuid).HasColumnName("Md_uuid");
 
             entity.HasOne(d => d.CodEstadoDevolucionNavigation).WithMany(p => p.TdcTchEstadoPedidos)
                 .HasForeignKey(d => d.CodEstadoDevolucion)
-                .HasConstraintName("FK_tdc_tch_estado_pedidos_tdc_cat_estados_devolucion_pedido_Co~");
+                .HasConstraintName("FK_Tdc_tch_estado_pedidos_Tdc_cat_estados_devolucion_pedido_Co~");
 
             entity.HasOne(d => d.CodEstadoEnvioNavigation).WithMany(p => p.TdcTchEstadoPedidos)
                 .HasForeignKey(d => d.CodEstadoEnvio)
-                .HasConstraintName("FK_tdc_tch_estado_pedidos_tdc_cat_estados_envio_pedido_Cod_est~");
+                .HasConstraintName("FK_Tdc_tch_estado_pedidos_Tdc_cat_estados_envio_pedido_Cod_est~");
 
             entity.HasOne(d => d.CodEstadoPagoNavigation).WithMany(p => p.TdcTchEstadoPedidos)
                 .HasForeignKey(d => d.CodEstadoPago)
-                .HasConstraintName("FK_tdc_tch_estado_pedidos_tdc_cat_estados_pago_pedido_Cod_esta~");
+                .HasConstraintName("FK_Tdc_tch_estado_pedidos_Tdc_cat_estados_pago_pedido_Cod_esta~");
 
             entity.HasOne(d => d.CodLineaNavigation).WithMany(p => p.TdcTchEstadoPedidos).HasForeignKey(d => d.CodLinea);
         });

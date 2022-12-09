@@ -31,7 +31,19 @@ namespace CSPharmaLRJuanca.Pages.Register
             DateTime dateTime = DateTime.Now;
             string fecha = dateTime.ToString("yyyy-MM-dd HH:mm:ss"), contrasenia=empleado.ClaveEmpleado;
             //Damos formato a la fecha
-           
+
+            var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var Charsarr = new char[8];
+            var random = new Random();
+
+            for (int i = 0; i < Charsarr.Length; i++)
+            {
+                Charsarr[i] = characters[random.Next(characters.Length)];
+            }
+
+            var mduuid = new String(Charsarr);
+            Console.WriteLine(mduuid);
+            //mduuid
 
 
             //Comprobamos que la contraseña introducida y la validacion coinciden        
@@ -51,15 +63,14 @@ namespace CSPharmaLRJuanca.Pages.Register
                     NpgsqlCommand consulta = new NpgsqlCommand($"SELECT * FROM \"dlk_informacional\".\"dlk_cat_acc_empleados\" WHERE cod_empleado='{empleado.CodEmpleado}'", connection);
                     NpgsqlDataReader resultadoConsulta = consulta.ExecuteReader();
                     //Consulta hecha a la base de datos
-                    int registros = resultadoConsulta.FieldCount;
-                    //Contamos las filas para el mduuid
+
 
 
                     if (resultadoConsulta.HasRows)
                     {
                         //La consulta obtienne resultado
                         Console.WriteLine("El usuario ya existe");
-                        this.Cadena = string.Format("El usuario ya está registrado.", registros);
+                        this.Cadena = string.Format("El usuario ya está registrado.");
 
                     }
                     else
@@ -68,13 +79,9 @@ namespace CSPharmaLRJuanca.Pages.Register
                         //Insertamos los valores para el registro
                         connection.Close();
 
-                        registros += 2;
-                        //FieldCount empieza desde 0 entonces sumamos dos, uno para igualarlo al numero de registros y otro para
-                        //superarlo en uno
-
                         connection.Open();
                         Console.WriteLine("Insertando usuario en la base de datos");
-                        consulta = new NpgsqlCommand($"INSERT INTO \"dlk_informacional\".\"dlk_cat_acc_empleados\" VALUES ('{registros}', '{fecha}', '{empleado.CodEmpleado}', '{empleado.ClaveEmpleado}', 1);", connection);
+                        consulta = new NpgsqlCommand($"INSERT INTO \"dlk_informacional\".\"dlk_cat_acc_empleados\" VALUES ('{mduuid}', '{fecha}', '{empleado.CodEmpleado}', '{empleado.ClaveEmpleado}', 1);", connection);
                         //Pondremos por defecto nivel de acceso 1 y se lo cambiaremos en la base de datos
                         consulta.ExecuteNonQuery();
                         Console.WriteLine("Insert realizado con éxito");

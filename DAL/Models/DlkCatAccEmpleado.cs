@@ -14,4 +14,6 @@ public partial class DlkCatAccEmpleado
     public string ClaveEmpleado { get; set; } = null!;
 
     public short NivelAccesoEmpleado { get; set; }
+
+    public long Id { get; set; }
 }
