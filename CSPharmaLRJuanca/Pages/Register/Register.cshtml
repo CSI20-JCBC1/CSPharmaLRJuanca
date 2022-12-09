@@ -8,21 +8,23 @@
     <fieldset>
         <legend>Register</legend>
         <div>
-            <label for="CodEmpleado">Cod. Empleado:</label>
-            <input type="text" name="CodEmpleado" value="" />
+            <label for="CodEmpleado"></label>
+            <input type="text" name="CodEmpleado" value="" placeholder="Cod.Empleado"/>
         </div>
+        <br />
         <div>
-            <label for="ClaveEmpleado">Clave Empleado:</label>
-            <input type="password" name="ClaveEmpleado" value="" />
+            <label for="ClaveEmpleado"></label>
+                <input type="password" name="ClaveEmpleado" value="" placeholder="Clave Empleado" />
         </div>
+            <br />
         <div>
-            <label for="ValContrasenia">Validar Contraseña:</label>
-            <input type="password" name="ValContrasenia" value="" />
+            <label for="ValContrasenia"></label>
+                <input type="password" name="ValContrasenia" value="" placeholder="Repetir contraseña" />
         </div>
-
+            <br />
         <div>
             <label>&nbsp;</label>
-            <input type="submit" asp-page-handler="Submit" value="submit" class="submit" />
+            <button type="submit" asp-page-handler="Submit" value=">" class="submit" >></button>
         </div>
         <hr/>
         @Model.Cadena

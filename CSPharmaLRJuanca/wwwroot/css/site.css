@@ -16,3 +16,21 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+form {
+    color: #5dc1b9;
+
+}
+
+input {
+    border-color: #5dc1b9;
+    color: #5dc1b9;
+}
+
+button {
+    border-color: #5dc1b9;
+    color: #5dc1b9;
+    background-color: #ffffff;
+    border-style: solid;
+    border-radius: 35px;
+}

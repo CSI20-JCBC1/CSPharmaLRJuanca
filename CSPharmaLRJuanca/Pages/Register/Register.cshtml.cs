@@ -74,8 +74,8 @@ namespace CSPharmaLRJuanca.Pages.Register
 
                         connection.Open();
                         Console.WriteLine("Insertando usuario en la base de datos");
-                        consulta = new NpgsqlCommand($"INSERT INTO \"dlk_informacional\".\"dlk_cat_acc_empleados\" VALUES ('{registros}', '{fecha}', '{empleado.CodEmpleado}', '{empleado.ClaveEmpleado}', 0);", connection);
-                        //Pondremos por defecto nivel de acceso 0 y se lo cambiaremos en la base de datos
+                        consulta = new NpgsqlCommand($"INSERT INTO \"dlk_informacional\".\"dlk_cat_acc_empleados\" VALUES ('{registros}', '{fecha}', '{empleado.CodEmpleado}', '{empleado.ClaveEmpleado}', 1);", connection);
+                        //Pondremos por defecto nivel de acceso 1 y se lo cambiaremos en la base de datos
                         consulta.ExecuteNonQuery();
                         Console.WriteLine("Insert realizado con éxito");
                         this.Cadena = string.Format("Registro completado.");
