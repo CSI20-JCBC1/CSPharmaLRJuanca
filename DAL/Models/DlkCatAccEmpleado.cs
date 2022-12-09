@@ -5,6 +5,8 @@ namespace DAL.Models;
 
 public partial class DlkCatAccEmpleado
 {
+    public long Id { get; set; }
+
     public string MdUuid { get; set; } = null!;
 
     public DateTime MdDate { get; set; }
@@ -14,6 +16,4 @@ public partial class DlkCatAccEmpleado
     public string ClaveEmpleado { get; set; } = null!;
 
     public short NivelAccesoEmpleado { get; set; }
-
-    public long Id { get; set; }
 }

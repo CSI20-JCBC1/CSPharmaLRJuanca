@@ -35,7 +35,7 @@ namespace CSPharmaLRJuanca.Pages.Shared.Login
             {
                 Console.WriteLine("Ha iniciado sesion con exito.");
                 //La base de datos tiene el usuario y la contraseña que hemos introducido
-                this.Cadena = string.Format("Ha iniciado sesión como {0} con nivel de acceso {1}.", empleado.CodEmpleado, empleado.NivelAccesoEmpleado);
+                this.Cadena = string.Format("Ha iniciado sesión como {0}", empleado.CodEmpleado);
                 
                 
             }
